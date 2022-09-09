@@ -67,6 +67,8 @@ int main()
 	if (Output.is_open())
 		for (int i = 0; i < res.size(); i++)
 			Output << res[i];
+
+
 	Output.close();
 }
 
