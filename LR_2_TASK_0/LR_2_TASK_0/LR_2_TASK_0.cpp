@@ -42,7 +42,6 @@ int main()
 		if (temp[i] != temp[i + 1])
 		{
 			res += temp[i];
-
 		}
 		else
 		{
