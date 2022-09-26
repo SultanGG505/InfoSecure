@@ -113,9 +113,19 @@ void main()
 	InputAlpha();
 	Process();
 	cout << result << endl;
-	fstream Result;
-	Result.open("C:\\Users\\SultanGG505_PC\\Desktop\\LR_4_TASK_0_RESULT.txt", fstream::in | fstream::out | fstream::app);
-	Result << result << endl;
-	Result.close();
+	//fstream Result;
+	////Result.open("C:\\Users\\SultanGG505_PC\\Desktop\\LR_4_TASK_0_RESULT.txt", fstream::in | fstream::out | fstream::app);
+	//Result.open("C:\\Users\\sulta\\OneDrive\\Рабочий стол\\output_LR_2_TASK_4.txt", fstream::in | fstream::out | fstream::app);
+	//Result << result << endl;
+	//Result.close();
+
+	fstream Output;
+	Output.open("C:\\Users\\sulta\\OneDrive\\Рабочий стол\\output_LR_4_TASK_0.txt", fstream::in | fstream::out | fstream::app);
+	if (Output.is_open())
+	{
+		Output << result << endl;
+	}
+
+
 	cout << "work done" << endl;
 }
