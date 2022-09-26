@@ -32,10 +32,10 @@ void InputAlpha() // Ввод алфавита // CompObjects()
 	cin >> n;
 	cout << "Введите длину слова " << endl;
 	cin >> k;*/
-	n = 16;
+	n = 15;
 	k = 8;
 	alphabet.resize(n);
-	alphabet = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+	alphabet = { '0','1','2','3','4','5','6','7','8','9','A','B','C','D','E' };
 	/*for (int i = 0; i < n; i++)
 	{
 		cout << "Введите символ алфавита: " << endl;
@@ -63,9 +63,11 @@ void PrintCompObjWithCondition(int k)
 		ObjToPrint += CompObj[i];
 	}
 	if (Condition(ObjToPrint))
+	{
 		result += ObjToPrint + "\n";
-	
-	cout << ObjToPrint << endl;
+		cout << ObjToPrint << endl;
+	}
+
 }
 
 bool HasNextCompObj()

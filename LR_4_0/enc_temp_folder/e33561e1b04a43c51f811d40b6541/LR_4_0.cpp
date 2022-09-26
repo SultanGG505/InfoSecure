@@ -65,7 +65,7 @@ void PrintCompObjWithCondition(int k)
 	if (Condition(ObjToPrint))
 		result += ObjToPrint + "\n";
 	
-	cout << ObjToPrint << endl;
+	//cout << ObjToPrint << endl;
 }
 
 bool HasNextCompObj()
