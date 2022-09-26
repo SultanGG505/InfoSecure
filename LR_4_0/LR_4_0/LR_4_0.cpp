@@ -32,10 +32,10 @@ void InputAlpha() // Ввод алфавита // CompObjects()
 	cin >> n;
 	cout << "Введите длину слова " << endl;
 	cin >> k;*/
-	n = 16;
+	n = 3;
 	k = 8;
 	alphabet.resize(n);
-	alphabet = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+	alphabet = {'2','5','7'};
 	/*for (int i = 0; i < n; i++)
 	{
 		cout << "Введите символ алфавита: " << endl;
@@ -65,7 +65,7 @@ void PrintCompObjWithCondition(int k)
 	if (Condition(ObjToPrint))
 		result += ObjToPrint + "\n";
 	
-	cout << ObjToPrint << endl;
+	/*cout << ObjToPrint << endl;*/
 }
 
 bool HasNextCompObj()
@@ -114,7 +114,7 @@ void main()
 	Process();
 	cout << result << endl;
 	fstream Result;
-	Result.open("C:\\Users\\SultanGG505_PC\\OneDrive\\Рабочий стол\\LR_4_TASK_0_RESULT.txt", fstream::in | fstream::out | fstream::app);
+	Result.open("C:\\Users\\SultanGG505_PC\\Desktop\\LR_4_TASK_0_RESULT.txt", fstream::in | fstream::out | fstream::app);
 	Result << result << endl;
 	Result.close();
 	cout << "work done" << endl;
