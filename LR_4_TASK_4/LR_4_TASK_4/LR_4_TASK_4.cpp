@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <algorithm>
 #include <string>
 //
 //4 Множители.Основная теорема арифметики утверждает, что каждое
@@ -33,9 +34,7 @@
 
 using namespace std;
 
-
-
-int factorize(int x) {   // vector<int>
+vector<int> factorize(int x) {   // vector<int>
     vector<int> factors;
 
     for (int i = 2; i <= sqrt(x); i++) {
@@ -44,31 +43,78 @@ int factorize(int x) {   // vector<int>
             x /= i;
         }
     }
-
     if (x != 1) {
         factors.push_back(x);
     }
-
-    return factors.size(); // можно также вернуть сами множители
+    return factors; // можно также вернуть сами множители
 }
+
+int factorial(int i)
+{
+    if (i == 0) return 1;
+    else return i * factorial(i - 1);
+}
+
+int permut(vector<int> factos)
+{
+    sort(factos.begin(), factos.end());
+    int high_fact = factos.size();
+    vector <int> step;
+    int index = 0;
+    int num = 0;
+    while (!factos.empty())
+    {
+        if (count(factos.begin(), factos.end(), num) == 0)
+        {
+            num++;
+            continue;
+        }
+        if (count(factos.begin(), factos.end(), num) != 0)
+        {
+            auto begin = factos.cbegin(); // указатель на первый элемент
+            auto end = factos.cend();     // указатель на последний элемент
+            //numbers2.erase(begin + 2, end - 1); // удаляем с третьего элемента до последнего
+            // numbers2 = {1, 2, 6}
+            
+            index = count(factos.begin(), factos.end(), num);
+            step.push_back(index);
+            /*num++;*/
+            factos.erase(begin , begin + index);
+        }
+    }
+    int result = factorial(high_fact);
+
+    for (int i = 0; i < step.size(); i++)
+    {
+        result /= factorial(step[i]);
+    }
+    cout << result << endl;
+    return result;
+}
+
 
 int main()
 {
     vector <int> input{};
-    //ifstream Stream("C:\\Users\\sulta\\OneDrive\\Рабочий стол\\lr_4_4_input.txt", fstream::in | fstream::out | fstream::app);
-    ifstream Stream("C:\\Users\\SultanGG505_PC\\Desktop\\lr_4_4_input.txt", fstream::in | fstream::out | fstream::app);
+    ifstream Stream("C:\\Users\\sulta\\OneDrive\\Рабочий стол\\lr_4_4_input.txt", fstream::in | fstream::out | fstream::app);
+    /*ifstream Stream("C:\\Users\\SultanGG505_PC\\Desktop\\lr_4_4_input.txt", fstream::in | fstream::out | fstream::app);*/
     if (Stream.is_open())
     {
         string temp;
         while (!Stream.eof())
         {
-            getline(Stream, temp);            
+            getline(Stream, temp);
             input.push_back(stoi(temp));
         }
+        Stream.close();
     }
-    Stream.close();
+    else
+        cout << "Файл не открыт" << endl;
+    permut(factorize(6));
+    permut(factorize(12));
+    permut(factorize(720));
+
     
-    cout << factorize(720) << endl;
 
 
 }

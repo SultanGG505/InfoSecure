@@ -33,9 +33,9 @@ void InputAlpha() // Ввод алфавита // CompObjects()
 	cout << "Введите длину слова " << endl;
 	cin >> k;*/
 	n = 3;
-	k = 4;
+	k = 8;
 	alphabet.resize(n);
-	alphabet = {'2','3','5'};
+	alphabet = {'2','5','7'};
 	/*for (int i = 0; i < n; i++)
 	{
 		cout << "Введите символ алфавита: " << endl;
@@ -49,10 +49,10 @@ bool Condition(string inp)
 {
 	/*std::string s = "aaabla-blaaa";
 	std::cout << std::count(s.begin(), s.end(), 'a') << std::endl;*/
-	/*if (count(inp.begin(), inp.end(), '2') == 2 && count(inp.begin(), inp.end(), '5') == 2)
+	if (count(inp.begin(), inp.end(), '2') == 2 && count(inp.begin(), inp.end(), '5') == 2)
 		return true;
 	else
-		return false;*/
+		return false;
 	return true;
 }
 
