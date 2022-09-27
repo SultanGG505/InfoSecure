@@ -88,16 +88,22 @@ int permut(vector<int> factos)
     {
         result /= factorial(step[i]);
     }
-    cout << result << endl;
+    /*cout << result << endl;*/
     return result;
 }
 
+void afterPermut(int n)
+{
+    int temp = 0;
+
+}
 
 int main()
 {
+    setlocale(LC_ALL, "RUS");
     vector <int> input{};
-    ifstream Stream("C:\\Users\\sulta\\OneDrive\\Рабочий стол\\lr_4_4_input.txt", fstream::in | fstream::out | fstream::app);
-    /*ifstream Stream("C:\\Users\\SultanGG505_PC\\Desktop\\lr_4_4_input.txt", fstream::in | fstream::out | fstream::app);*/
+   /* ifstream Stream("C:\\Users\\sulta\\OneDrive\\Рабочий стол\\lr_4_4_input.txt", fstream::in | fstream::out | fstream::app);*/
+    ifstream Stream("C:\\Users\\SultanGG505_PC\\Desktop\\lr_4_4_input.txt", fstream::in | fstream::out | fstream::app);
     if (Stream.is_open())
     {
         string temp;
@@ -110,9 +116,29 @@ int main()
     }
     else
         cout << "Файл не открыт" << endl;
-    permut(factorize(6));
-    permut(factorize(12));
-    permut(factorize(720));
+
+
+    int temp = 0, i = 0;
+    while (i < input.size())
+    {
+        if (permut(factorize(temp)) == input[i])
+        {
+            cout << temp << endl;
+            i++; temp++;
+        }            
+        else
+        {
+            temp++;
+        }
+    }
+
+    
+   
+
+
+    //permut(factorize(6)); // 2 - 6
+    //permut(factorize(12)); // 3 - 12
+    //permut(factorize(720)); // 105 - 720
 
     
 
