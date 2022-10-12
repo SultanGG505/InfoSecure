@@ -15,9 +15,22 @@ A, LS, LO) соответствует критерию безопасности 
 #include <string>
 using namespace std;  
 
+string RW_gen() // рандоматор прав доступа на чтение и запись
+{
+    int a = rand() % 3;
+    if (a == 0)
+        return "R";
+    if (a == 1)
+        return "W";
+    if (a == 2)
+        return "RW";
+}
+
 int main()
 {
-    int n, m;       
+    setlocale(LC_ALL, "RUS");
+    int n, m; // число субъектов(программ обработчиков) n и число объектов(содержат информацию) m 
+    cout << "Введите число субъектов и объектов через строку" << endl;
     cin >> n >> m;  
 
     vector < vector <string> > a(n, vector <string>(m)); 
@@ -25,7 +38,7 @@ int main()
     for (int i = 0; i < n; i++)     
         for (int j = 0; j < m; j++) 
         {
-            cin >> a[i][j]; 
+            a[i][j] = RW_gen();
         }
 
     for (int i = 0; i < n; i++) 
