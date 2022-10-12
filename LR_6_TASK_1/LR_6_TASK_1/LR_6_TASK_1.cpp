@@ -35,22 +35,43 @@ int main()
 	int n, m; // число субъектов(программ обработчиков) n и число объектов(содержат информацию) m 
 	cout << "Введите число субъектов и объектов через строку" << endl;
 	cin >> n >> m;
+	cout << "Ручной ввод - 0, автоматический - 1" << endl;
+	int inp = 0;
+	cin >> inp;
 
 	vector < vector <string> > RW(n, vector <string>(m));
 	vector <int> LS(n); // уровни допуска субъектов S
 	vector <int> LO(m); // уровень секретности объектов O
 	srand(time(0));
+	cout << "Генерация RW" << endl;
 	for (int i = 0; i < n; i++)
 		for (int j = 0; j < m; j++)
 		{
-			RW[i][j] = RW_gen();
+			if (inp == 0)
+				cin >> RW[i][j];
+			else
+				RW[i][j] = RW_gen();
 		}
 
+	cout << "Генерация LS" << endl;
+
 	for (int i = 0; i < n; i++)
-		LS[i] = rand() % 3 + 1;
+	{
+		if (inp == 0)
+			cin >> LS[i];
+		else
+			LS[i] = rand() % 3 + 1;
+	}
+		
+	cout << "Генерация LO" << endl;
 
 	for (int i = 0; i < m; i++)
-		LO[i] = rand() % 3 + 1;
+	{
+		if (inp == 0)
+			cin >> LO[i];
+		else
+			LO[i] = rand() % 3 + 1;
+	}
 
 	cout << "Вывод сгенерированной матрицы на права записи и чтения" << endl;
 
@@ -88,9 +109,9 @@ int main()
 		}
 	}
 	if (ok)
-		cout << "ok" << endl;
+		cout << "Система соответствует критерию безопасности Белла - Лападулы" << endl;
 	else
-		cout << "ne ok" << endl;
+		cout << "Система НЕ соответствует критерию безопасности Белла - Лападулы" << endl;
 
 
 
