@@ -19,13 +19,15 @@ using namespace std;
 string RW_gen() // рандоматор прав доступа на чтение и запись
 {
 
-	int a = rand() % 3;
+	int a = rand() % 4;
 	if (a == 0)
 		return "R";
 	if (a == 1)
 		return "W";
 	if (a == 2)
 		return "RW";
+	if (a == 3)
+		return "";
 }
 
 
@@ -101,7 +103,11 @@ int main()
 	{
 		for (int j = 0; j < m; j++)
 		{
-			if ((LS[i] > LO[j] && RW[i][j] != ""))
+			// > w - ok
+			// <= r - ok
+			// <= w - neok
+			// > r - neok
+			if ((LS[i] > LO[j] && RW[i][j] == "W") || (LS[i] <= LO[j] && RW[i][j] == "R"))
 			{
 				ok = false;
 				break;
