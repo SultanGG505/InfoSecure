@@ -134,7 +134,6 @@ void main()
 				RW[i][j] = RW_gen();
 		}
 
-
 	InputAlpha(n);
 	Process();
 	ofstream Output_LS;
@@ -150,7 +149,6 @@ void main()
 	InputAlpha(m);
 	Process();
 	ofstream Output_LO;
-	/*("C:\\Users\\sulta\\OneDrive\\Рабочий стол\\output_LR_4_TASK_0.txt", fstream::in | fstream::out | fstream::app);*/
 	Output_LO.open("LO.txt", fstream::in | fstream::out | fstream::trunc);
 	if (Output_LO.is_open())
 	{
@@ -160,24 +158,56 @@ void main()
 	CompObj.clear();
 	result = "";
 
+	vector <string> LS_s, LO_s;
 
-	/*bool ok = false;
-	while (ok != true)
-	{
-
+	string LS_, LO_;
+	ifstream inp_LS("LS.txt");
+	while (getline(inp_LS, LS_)) {
+		LS_s.push_back(LS_);
 	}
-	for (int i = 0; i < n; i++)
-	{
-		for (int j = 0; j < m; j++)
+	inp_LS.close();
+
+	ifstream inp_LO("LO.txt");
+	while (getline(inp_LO, LO_)) {
+		LO_s.push_back(LO_);
+	}
+	inp_LO.close();
+
+	LS_s.pop_back();
+	LO_s.pop_back();
+
+	string temp = "cat";
+	char tab2[1024];
+	strcpy_s(tab2, temp.c_str());
+
+	char c = '1';
+	int i = c - '0'; // i is now equal to 1, not '1'
+
+	bool ok = false;
+	int k = 0, d = 0;
+	while (ok != true)
+	{	
+		string TMP_S = LS_s[2];
+		
+		
+		vector<int> v(TMP_S.size());
+		transform(TMP_S.begin(), TMP_S.end(), v.begin(), [](char c) {return c - '0'; });
+
+
+		for (int i = 0; i < n; i++) // субъекты LS
 		{
-			if ((LS[i] > LO[j] && RW[i][j] == "W") || (LS[i] <= LO[j] && RW[i][j] == "R"))
+			for (int j = 0; j < m; j++) // объекты LO
 			{
-				ok = true;
-				break;
+				if ((LS[i] > LO[j] && RW[i][j] == "W") || (LS[i] <= LO[j] && RW[i][j] == "R"))
+				{
+					ok = true;
+					break;
+				}
 			}
 		}
 	}
-
+	
+	/*
 
 	cout << "Вывод сгенерированной матрицы на права записи и чтения" << endl;
 
