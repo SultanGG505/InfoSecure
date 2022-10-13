@@ -10,14 +10,13 @@ using namespace std;
 
 int n; // размер алфавита
 int k; // длина слова
-vector<int> CompObj; //комб.объект
-vector<int> alphabet; // алфавит
+vector<char> CompObj; //комб.объект
+vector<char> alphabet; // алфавит
 
 string result = "";
 
 string RW_gen() // рандоматор прав доступа на чтение и запись
 {
-
 	int a = rand() % 3;
 	if (a == 0)
 		return "R";
@@ -36,7 +35,7 @@ void InputAlpha(int x) // Ввод алфавита // CompObjects()
 	n = 3;
 	k = x;
 	alphabet.resize(n);
-	alphabet = { 1,2,3 };
+	alphabet = { '1','2','3' };
 	/*for (int i = 0; i < n; i++)
 	{
 		cout << "Введите символ алфавита: " << endl;
@@ -46,16 +45,16 @@ void InputAlpha(int x) // Ввод алфавита // CompObjects()
 	cout << "Алфавит введён" << endl;
 }
 
-bool Condition(string inp)
-{
-	/*std::string s = "aaabla-blaaa";
-	std::cout << std::count(s.begin(), s.end(), 'a') << std::endl;*/
-	if (count(inp.begin(), inp.end(), '2') == 2 && count(inp.begin(), inp.end(), '5') == 2)
-		return true;
-	else
-		return false;
-	return true;
-}
+//bool Condition(string inp)
+//{
+//	/*std::string s = "aaabla-blaaa";
+//	std::cout << std::count(s.begin(), s.end(), 'a') << std::endl;*/
+//	if (count(inp.begin(), inp.end(), '2') == 2 && count(inp.begin(), inp.end(), '5') == 2)
+//		return true;
+//	else
+//		return false;
+//	return true;
+//}
 
 void PrintCompObjWithCondition(int k)
 {
@@ -64,8 +63,7 @@ void PrintCompObjWithCondition(int k)
 	{
 		ObjToPrint += CompObj[i];
 	}
-	if (Condition(ObjToPrint))
-		result += ObjToPrint + "\n";
+	result += ObjToPrint + "\n";
 
 	/*cout << ObjToPrint << endl;*/
 }
@@ -112,8 +110,8 @@ void Process()
 void main()
 {
 	setlocale(LC_ALL, "RUS");
-	InputAlpha(4);
-	Process();
+	/*InputAlpha(4);
+	Process();*/
 
 	int n, m; // число субъектов(программ обработчиков) n и число объектов(содержат информацию) m 
 	cout << "Введите число субъектов и объектов через строку" << endl;
@@ -136,25 +134,50 @@ void main()
 				RW[i][j] = RW_gen();
 		}
 
-	cout << "Генерация LS" << endl;
 
+	InputAlpha(n);
+	Process();
+	ofstream Output_LS;
+	Output_LS.open("LS.txt", fstream::in | fstream::out | fstream::trunc);
+	if (Output_LS.is_open())
+	{
+		Output_LS << result << endl;
+	}
+	Output_LS.close();
+	CompObj.clear();
+	result = "";
+
+	InputAlpha(m);
+	Process();
+	ofstream Output_LO;
+	/*("C:\\Users\\sulta\\OneDrive\\Рабочий стол\\output_LR_4_TASK_0.txt", fstream::in | fstream::out | fstream::app);*/
+	Output_LO.open("LO.txt", fstream::in | fstream::out | fstream::trunc);
+	if (Output_LO.is_open())
+	{
+		Output_LO << result << endl;
+	}
+	Output_LO.close();
+	CompObj.clear();
+	result = "";
+
+
+	/*bool ok = false;
+	while (ok != true)
+	{
+
+	}
 	for (int i = 0; i < n; i++)
 	{
-		if (inp == 0)
-			cin >> LS[i];
-		else
-			LS[i] = rand() % 3 + 1;
+		for (int j = 0; j < m; j++)
+		{
+			if ((LS[i] > LO[j] && RW[i][j] == "W") || (LS[i] <= LO[j] && RW[i][j] == "R"))
+			{
+				ok = true;
+				break;
+			}
+		}
 	}
 
-	cout << "Генерация LO" << endl;
-
-	for (int i = 0; i < m; i++)
-	{
-		if (inp == 0)
-			cin >> LO[i];
-		else
-			LO[i] = rand() % 3 + 1;
-	}
 
 	cout << "Вывод сгенерированной матрицы на права записи и чтения" << endl;
 
@@ -179,21 +202,10 @@ void main()
 
 	cout << endl;
 
-	bool ok = true;
-	for (int i = 0; i < n; i++)
-	{
-		for (int j = 0; j < m; j++)
-		{
-			if ((LS[i] > LO[j] && RW[i][j] != ""))
-			{
-				ok = false;
-				break;
-			}
-		}
-	}
+
 	if (ok)
 		cout << "Система соответствует критерию безопасности Белла - Лападулы" << endl;
 	else
-		cout << "Система НЕ соответствует критерию безопасности Белла - Лападулы" << endl;
-	
+		cout << "Система НЕ соответствует критерию безопасности Белла - Лападулы" << endl;*/
+
 }
