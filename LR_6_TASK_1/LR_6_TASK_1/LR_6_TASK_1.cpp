@@ -107,16 +107,15 @@ int main()
 			// <= r - ok
 			// <= w - neok
 			// > r - neok
-		
-			if (RW[i][j].size() == 1)
+
+
+			if (!((LS[i] >= LO[j] && RW[i][j] == "W") || (LS[i] <= LO[j] && RW[i][j] == "R")))
 			{
-				if (!((LS[i] >= LO[j] && RW[i][j] == "W") || (LS[i] <= LO[j] && RW[i][j] == "R")))
-				{
-					ok = false;
-					break;
-				}
+				ok = false;
+				break;
 			}
-			
+
+
 		}
 	}
 	if (ok)

@@ -183,51 +183,45 @@ void main()
 	//char c = '1';
 	//int i = c - '0'; // i is now equal to 1, not '1'
 
-	bool ok = false;
+	
 	string TMP_S, TMP_O;
-	while (ok != true)
+	bool isNormal = false;
+	for (int p = 0; p < LS_s.size(); p++)
 	{
-		for (int p = 0; p < LS_s.size(); p++)
-		{
-			TMP_S = LS_s[p];
-			/*vector<int> v(TMP_S.size());*/
-			transform(TMP_S.begin(), TMP_S.end(), LS.begin(), [](char c) {return c - '0'; });
+		TMP_S = LS_s[p];
+		/*vector<int> v(TMP_S.size());*/
+		transform(TMP_S.begin(), TMP_S.end(), LS.begin(), [](char c) {return c - '0'; });
 
-			for (int e = 0; e < LO_s.size(); e++)
+		for (int e = 0; e < LO_s.size(); e++)
+		{
+			TMP_O = LO_s[e];
+			/*vector<int> v(TMP_S.size());*/
+			transform(TMP_O.begin(), TMP_O.end(), LO.begin(), [](char c) {return c - '0'; });
+			bool ok = true;
+			for (int i = 0; i < n; i++) // субъекты LS
 			{
-				TMP_O = LO_s[e];
-				/*vector<int> v(TMP_S.size());*/
-				transform(TMP_O.begin(), TMP_O.end(), LO.begin(), [](char c) {return c - '0'; });
-				for (int i = 0; i < n; i++) // субъекты LS
+				if (!ok)
+					break;
+				for (int j = 0; j < m; j++) // объекты LO
 				{
-					for (int j = 0; j < m; j++) // объекты LO
+					
+					if (((LS[i] < LO[j] && RW[i][j] == "W") || (LS[i] > LO[j] && RW[i][j] == "R")))
 					{
-						if (RW[i][j].size() == 2)
-						{
-							if (((LS[i] > LO[j] && RW[i][j][1] == 'W') || (LS[i] <= LO[j] && RW[i][j][0] == 'R')))
-							{
-								ok = true;
-								break;
-							}
-						}
-						if (RW[i][j].size() == 1)
-						{
-							if (((LS[i] > LO[j] && RW[i][j] == "W") || (LS[i] <= LO[j] && RW[i][j] == "R")))
-							{
-								ok = true;
-								break;
-							}
-						}
+						ok = false;
+						break;
 					}
 
 				}
-			}
 
+			}
+			if (ok) {
+				isNormal = true;
+				goto m;
+			}
 		}
 
 	}
-
-
+m:
 	cout << "Вывод сгенерированной матрицы на права записи и чтения" << endl;
 
 	for (int i = 0; i < n; i++)
@@ -240,7 +234,7 @@ void main()
 	cout << "Вывод сгенерированного массива уровней допуска субъектов S" << endl;
 
 	for (int i = 0; i < n; i++)
-		cout << LS[i] << " ";
+		cout << LS[i] << endl;
 
 	cout << endl;
 
@@ -252,7 +246,7 @@ void main()
 	cout << endl;
 
 
-	if (ok)
+	if (isNormal)
 		cout << "Система соответствует критерию безопасности Белла - Лападулы" << endl;
 	else
 		cout << "Система НЕ соответствует критерию безопасности Белла - Лападулы" << endl;
