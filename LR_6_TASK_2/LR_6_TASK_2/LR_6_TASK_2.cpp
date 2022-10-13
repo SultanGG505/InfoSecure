@@ -17,7 +17,7 @@ string result = "";
 
 string RW_gen() // рандоматор прав доступа на чтение и запись
 {
-	int a = rand() % 3;
+	int a = rand() % 2;
 	if (a == 0)
 		return "R";
 	if (a == 1)
@@ -176,39 +176,55 @@ void main()
 	LS_s.pop_back();
 	LO_s.pop_back();
 
-	string temp = "cat";
-	char tab2[1024];
-	strcpy_s(tab2, temp.c_str());
+	//string temp = "cat";
+	//char tab2[1024];
+	//strcpy_s(tab2, temp.c_str());
 
-	char c = '1';
-	int i = c - '0'; // i is now equal to 1, not '1'
+	//char c = '1';
+	//int i = c - '0'; // i is now equal to 1, not '1'
 
 	bool ok = false;
 	int k = 0, d = 0;
+	string TMP_S, TMP_O;
 	while (ok != true)
 	{	
-		string TMP_S = LS_s[2];
-		
-		
-		vector<int> v(TMP_S.size());
-		transform(TMP_S.begin(), TMP_S.end(), v.begin(), [](char c) {return c - '0'; });
 
-
+		TMP_S = LS_s[k];		
+		/*vector<int> v(TMP_S.size());*/
+		transform(TMP_S.begin(), TMP_S.end(), LS.begin(), [](char c) {return c - '0'; });
+		k++;
+		if (ok)
+			break;
 		for (int i = 0; i < n; i++) // субъекты LS
 		{
+			if (ok)
+				break;
+			TMP_O = LO_s[d];
+			/*vector<int> v(TMP_S.size());*/
+			transform(TMP_O.begin(), TMP_O.end(), LO.begin(), [](char c) {return c - '0'; });
+			d++;
 			for (int j = 0; j < m; j++) // объекты LO
 			{
-				if ((LS[i] > LO[j] && RW[i][j] == "W") || (LS[i] <= LO[j] && RW[i][j] == "R"))
+				if (RW[i][j].size() == 2)
 				{
-					ok = true;
-					break;
+					if (((LS[i] > LO[j] && RW[i][j][1] == 'W') || (LS[i] <= LO[j] && RW[i][j][0] == 'R')))
+					{
+						ok = true;
+						break;
+					}
+				}
+				if (RW[i][j].size() == 1)
+				{
+					if (((LS[i] > LO[j] && RW[i][j] == "W") || (LS[i] <= LO[j] && RW[i][j] == "R")))
+					{
+						ok = true;
+						break;
+					}
 				}
 			}
+			
 		}
 	}
-	
-	/*
-
 	cout << "Вывод сгенерированной матрицы на права записи и чтения" << endl;
 
 	for (int i = 0; i < n; i++)
@@ -236,6 +252,6 @@ void main()
 	if (ok)
 		cout << "Система соответствует критерию безопасности Белла - Лападулы" << endl;
 	else
-		cout << "Система НЕ соответствует критерию безопасности Белла - Лападулы" << endl;*/
+		cout << "Система НЕ соответствует критерию безопасности Белла - Лападулы" << endl;
 
 }

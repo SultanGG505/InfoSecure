@@ -19,15 +19,14 @@ using namespace std;
 string RW_gen() // рандоматор прав доступа на чтение и запись
 {
 
-	int a = rand() % 4;
+	int a = rand() % 3;
 	if (a == 0)
 		return "R";
 	if (a == 1)
 		return "W";
 	if (a == 2)
 		return "RW";
-	if (a == 3)
-		return "";
+
 }
 
 
@@ -54,6 +53,14 @@ int main()
 			else
 				RW[i][j] = RW_gen();
 		}
+	cout << "Вывод сгенерированной матрицы на права записи и чтения" << endl;
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < m; j++)
+			cout << RW[i][j] << ' ';
+		cout << endl;
+	}
 
 	cout << "Генерация LS" << endl;
 
@@ -64,7 +71,7 @@ int main()
 		else
 			LS[i] = rand() % 3 + 1;
 	}
-		
+
 	cout << "Генерация LO" << endl;
 
 	for (int i = 0; i < m; i++)
@@ -75,14 +82,7 @@ int main()
 			LO[i] = rand() % 3 + 1;
 	}
 
-	cout << "Вывод сгенерированной матрицы на права записи и чтения" << endl;
 
-	for (int i = 0; i < n; i++)
-	{
-		for (int j = 0; j < m; j++)
-			cout << RW[i][j] << ' ';
-		cout << endl;
-	}
 
 	cout << "Вывод сгенерированного массива уровней допуска субъектов S" << endl;
 
@@ -101,17 +101,31 @@ int main()
 	bool ok = true;
 	for (int i = 0; i < n; i++)
 	{
+		if (ok == false)
+			break;
 		for (int j = 0; j < m; j++)
 		{
 			// > w - ok
 			// <= r - ok
 			// <= w - neok
 			// > r - neok
-			if (!(LS[i] > LO[j] && RW[i][j] == "W") || (LS[i] <= LO[j] && RW[i][j] == "R"))
+			if (RW[i][j].size() == 2)
 			{
-				ok = false;
-				break;
+				if (!((LS[i] > LO[j] && RW[i][j][1] == 'W') || (LS[i] <= LO[j] && RW[i][j][0] == 'R')))
+				{
+					ok = false;
+					break;
+				}
 			}
+			if (RW[i][j].size() == 1)
+			{
+				if (!((LS[i] > LO[j] && RW[i][j] == "W") || (LS[i] <= LO[j] && RW[i][j] == "R")))
+				{
+					ok = false;
+					break;
+				}
+			}
+			
 		}
 	}
 	if (ok)
