@@ -184,47 +184,50 @@ void main()
 	//int i = c - '0'; // i is now equal to 1, not '1'
 
 	bool ok = false;
-	int k = 0, d = 0;
 	string TMP_S, TMP_O;
 	while (ok != true)
-	{	
-
-		TMP_S = LS_s[k];		
-		/*vector<int> v(TMP_S.size());*/
-		transform(TMP_S.begin(), TMP_S.end(), LS.begin(), [](char c) {return c - '0'; });
-		k++;
-		if (ok)
-			break;
-		for (int i = 0; i < n; i++) // субъекты LS
+	{
+		for (int p = 0; p < LS_s.size(); p++)
 		{
-			if (ok)
-				break;
-			TMP_O = LO_s[d];
+			TMP_S = LS_s[p];
 			/*vector<int> v(TMP_S.size());*/
-			transform(TMP_O.begin(), TMP_O.end(), LO.begin(), [](char c) {return c - '0'; });
-			d++;
-			for (int j = 0; j < m; j++) // объекты LO
+			transform(TMP_S.begin(), TMP_S.end(), LS.begin(), [](char c) {return c - '0'; });
+
+			for (int e = 0; e < LO_s.size(); e++)
 			{
-				if (RW[i][j].size() == 2)
+				TMP_O = LO_s[e];
+				/*vector<int> v(TMP_S.size());*/
+				transform(TMP_O.begin(), TMP_O.end(), LO.begin(), [](char c) {return c - '0'; });
+				for (int i = 0; i < n; i++) // субъекты LS
 				{
-					if (((LS[i] > LO[j] && RW[i][j][1] == 'W') || (LS[i] <= LO[j] && RW[i][j][0] == 'R')))
+					for (int j = 0; j < m; j++) // объекты LO
 					{
-						ok = true;
-						break;
+						if (RW[i][j].size() == 2)
+						{
+							if (((LS[i] > LO[j] && RW[i][j][1] == 'W') || (LS[i] <= LO[j] && RW[i][j][0] == 'R')))
+							{
+								ok = true;
+								break;
+							}
+						}
+						if (RW[i][j].size() == 1)
+						{
+							if (((LS[i] > LO[j] && RW[i][j] == "W") || (LS[i] <= LO[j] && RW[i][j] == "R")))
+							{
+								ok = true;
+								break;
+							}
+						}
 					}
-				}
-				if (RW[i][j].size() == 1)
-				{
-					if (((LS[i] > LO[j] && RW[i][j] == "W") || (LS[i] <= LO[j] && RW[i][j] == "R")))
-					{
-						ok = true;
-						break;
-					}
+
 				}
 			}
-			
+
 		}
+
 	}
+
+
 	cout << "Вывод сгенерированной матрицы на права записи и чтения" << endl;
 
 	for (int i = 0; i < n; i++)
