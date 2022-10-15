@@ -17,7 +17,7 @@ string result = "";
 
 string RW_gen() // рандоматор прав доступа на чтение и запись
 {
-	int a = rand() % 2;
+	int a = rand() % 3;
 	if (a == 0)
 		return "R";
 	if (a == 1)
@@ -183,7 +183,7 @@ void main()
 	//char c = '1';
 	//int i = c - '0'; // i is now equal to 1, not '1'
 
-	
+
 	string TMP_S, TMP_O;
 	bool isNormal = false;
 	for (int p = 0; p < LS_s.size(); p++)
@@ -204,8 +204,12 @@ void main()
 					break;
 				for (int j = 0; j < m; j++) // объекты LO
 				{
-					
-					if (((LS[i] < LO[j] && RW[i][j] == "W") || (LS[i] > LO[j] && RW[i][j] == "R")))
+					/// <summary>
+					/// 1) Субъект имеет право читать только те объекты, уровень безопасности которых не превышает его собственный уровень безопасности
+					/// 2) Субъект имеет право записывать только в те объекты,уровень безопасности которых не ниже его собственного уровня безопасности
+					/// </summary>
+					/// <returns></returns>
+					if ((LS[i] < LO[j] && RW[i][j] == "W") || (LS[i] > LO[j] && RW[i][j] == "R") || (LS[i] != LO[j] && RW[i][j] == "RW"))
 					{
 						ok = false;
 						break;
