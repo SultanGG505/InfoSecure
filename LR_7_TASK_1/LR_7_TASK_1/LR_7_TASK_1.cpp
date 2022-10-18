@@ -292,12 +292,12 @@ void interpreter()
 	vector <string> temp_N_M_A;
 
 	string s;
-	ifstream prgrm("environ.txt");
-	while (getline(prgrm, s))
+	ifstream environ_file("environ.txt");
+	while (getline(environ_file, s))
 	{
 		temp_N_M_A.push_back(s);
 	}
-	prgrm.close();
+	environ_file.close();
 
 	n = stoi(temp_N_M_A[0]);
 	m = stoi(temp_N_M_A[1]);
@@ -326,6 +326,23 @@ void interpreter()
 		for (int j = 0; j < m; j++)
 			cout << RW_FROM_FILE_RZLT[i][j] << ' ';
 		cout << endl;
+	}
+
+	vector <string> temp_prgrm;
+
+	string s2;
+	ifstream prgrm_file("prgrm.txt");
+	while (getline(prgrm_file, s))
+	{
+		temp_prgrm.push_back(s);
+	}
+	prgrm_file.close();
+
+	int cmd_K = temp_prgrm.size();
+
+	for (int i = 0; i < cmd_K; i++)
+	{
+		cout << temp_prgrm[i] << endl;
 	}
 }
 
