@@ -22,5 +22,6 @@
   <ItemGroup>
     <Text Include="environ.txt" />
     <Text Include="prgrm.txt" />
+    <Text Include="rzlt.txt" />
   </ItemGroup>
 </Project>

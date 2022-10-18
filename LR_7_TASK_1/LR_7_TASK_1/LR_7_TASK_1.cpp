@@ -125,7 +125,7 @@ string RWOX_gen() // рандоматор прав доступа на чтен�
 	}
 
 	// от 0 до 15
-	int rander = rand() % 15 + 0;
+	int rander = rand() % 15 + 1; // !!!!!!!!!!!!!!!!!!!!!!!!! + 0 ТИПА НЕТ ВАРИАНТА ОТСУТСВИЯ КОМАНД
 	string for_return = RWOX[rander];
 	return for_return;
 
@@ -185,7 +185,7 @@ string CMD_gen(int n, int m)
 
 		/*
 		Enter rule P
-		Enter P = '{RWOX}' image N image M 
+		Enter P = '{RWOX}' image N image M
 		где N - строка
 		где M - столбец
 		"cer = '{RWOX}' image_N image_M"
@@ -271,7 +271,7 @@ string CMD_gen(int n, int m)
 	return res_cmd;
 }
 
-void prgrm_writer(int count,int n, int m)
+void prgrm_writer(int count, int n, int m)
 {
 	ofstream output_prgrm;
 	output_prgrm.open("prgrm.txt", fstream::in | fstream::out | fstream::trunc);
@@ -315,19 +315,19 @@ void main()
 		{
 			for (int j = 0; j < m; j++)
 			{
-				output_environ << RW[i][j] << "/";
+				output_environ << RW[i][j] << " "; ////// !!!!!!!!!!!!!!!!!! ЗДЕСЬ ПРИДУМАТЬ РАЗДЕЛИТЕЛЬ МЕЖДУ пустыми RW смотреть коммент в 120 строке
 			}
-			if(i != n - 1)
-				output_environ << endl;
+
+			output_environ << endl;
 		}
 	}
 	output_environ.close();
 
 	prgrm_writer(k, n, m);
 
-	
 
-	
+
+
 
 
 

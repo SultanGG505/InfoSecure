@@ -132,6 +132,7 @@
   <ItemGroup>
     <Text Include="environ.txt" />
     <Text Include="prgrm.txt" />
+    <Text Include="rzlt.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
