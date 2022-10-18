@@ -1,7 +1,6 @@
-cco = 'O+' image_4
-cer = 'R' image_1 image_5
-cdo = 'O-' image_3
-ccs = 'S+' image_2
-ccs = 'S+' image_2
-cdo = 'O-' image_6
-cds = 'S-' image_3
+cds = 'S-' image_1
+cco = 'O+' image_7
+ccs = 'S+' image_1
+cdo = 'O-' image_10
+cdo = 'O-' image_1
+cdo = 'O-' image_9

@@ -4,6 +4,7 @@
 #include <fstream>
 #include <string>
 #include <ctime>
+#include <regex>
 using namespace std;
 
 
@@ -285,6 +286,49 @@ void prgrm_writer(int count, int n, int m)
 	output_prgrm.close();
 }
 
+void interpreter()
+{
+	int n, m;
+	vector <string> temp_N_M_A;
+
+	string s;
+	ifstream prgrm("environ.txt");
+	while (getline(prgrm, s))
+	{
+		temp_N_M_A.push_back(s);
+	}
+	prgrm.close();
+
+	n = stoi(temp_N_M_A[0]);
+	m = stoi(temp_N_M_A[1]);
+
+	temp_N_M_A.erase(temp_N_M_A.begin(), temp_N_M_A.begin() + 2);
+
+	vector < vector <string> > RW_FROM_FILE_RZLT(n, vector <string>(m));
+	string input = "";
+	regex re("[ ]");
+
+	for (int i = 0; i < n; i++) // субъекты
+	{
+		input = temp_N_M_A[i];
+		sregex_token_iterator first{ input.begin(), input.end(), re, -1 }, last;
+		vector<string> tokens{ first, last };
+		for (int j = 0; j < m; j++) // объекты
+		{
+			RW_FROM_FILE_RZLT[i][j] = tokens[j];
+		}			
+	}
+		
+	cout << "вывод для теста RW_FROM_FILE" << endl;
+	
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < m; j++)
+			cout << RW_FROM_FILE_RZLT[i][j] << ' ';
+		cout << endl;
+	}
+}
+
 void main()
 {
 	setlocale(LC_ALL, "RUS");
@@ -325,7 +369,7 @@ void main()
 
 	prgrm_writer(k, n, m);
 
-
+	interpreter();
 
 
 
