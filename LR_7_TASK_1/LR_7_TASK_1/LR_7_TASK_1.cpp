@@ -340,10 +340,37 @@ void interpreter()
 
 	int cmd_K = temp_prgrm.size();
 
+
+
 	for (int i = 0; i < cmd_K; i++)
 	{
 		cout << temp_prgrm[i] << endl;
 	}
+
+	string input2;
+	regex re2(" image_");
+
+	vector < vector <string> > structed_CMD(cmd_K, vector <string>());
+
+	for (int i = 0; i < cmd_K; i++)
+	{
+		input2 = temp_prgrm[i];
+		sregex_token_iterator first{ input2.begin(), input2.end(), re2, -1 }, last;//the '-1' is what makes the regex split (-1 := what was not matched)
+		vector<string> tokens{ first, last };
+		int k = tokens.size();
+		structed_CMD[i].resize(k);
+		for (int d = 0; d < k; d++)
+		{
+			
+			structed_CMD[i][d] = tokens[d];
+		}
+			
+
+	}
+	
+
+
+
 }
 
 void main()
