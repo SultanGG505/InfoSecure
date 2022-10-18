@@ -15,38 +15,7 @@ vector<char> alphabet; // алфавит
 
 string result = "";
 
-string RWOX_gen() // рандоматор прав доступа на чтение и запись
-{
 
-	string M[4] = { "R","W","O","X" };
-	int w = 4;
-
-	int i, j, n;
-	string buff;
-	
-	n = pow(2, w);
-	vector <string> RWOX;
-
-	//m = rand() % 10 + 1; РАНДОМ ОТ 1 ДО 10
-
-	for (int i = 0; i < n; i++)
-	{
-		for (j = 0; j < w; j++)
-			if (i & (1 << j))
-			{
-				buff += M[j];
-			}
-		/*cout << buff << endl;*/
-		RWOX.push_back(buff);
-		buff = "";
-	}
-	
-	// от 0 до 15
-	int rander = rand() % 15 + 0;
-	string for_return = RWOX[rander];
-	return for_return;
-
-}
 
 void InputAlpha(int x) // Ввод алфавита // CompObjects()
 {
@@ -129,14 +98,203 @@ void Process()
 	PrintCompObjWithCondition(k);
 }
 
+string RWOX_gen() // рандоматор прав доступа на чтение и запись
+{
+
+	string M[4] = { "R","W","O","X" };
+	int w = 4;
+
+	int i, j, n;
+	string buff;
+
+	n = pow(2, w);
+	vector <string> RWOX;
+
+	//m = rand() % 10 + 1; РАНДОМ ОТ 1 ДО 10
+
+	for (int i = 0; i < n; i++)
+	{
+		for (j = 0; j < w; j++)
+			if (i & (1 << j))
+			{
+				buff += M[j];
+			}
+		/*cout << buff << endl;*/
+		RWOX.push_back(buff);
+		buff = "";
+	}
+
+	// от 0 до 15
+	int rander = rand() % 15 + 0;
+	string for_return = RWOX[rander];
+	return for_return;
+
+}
+
+
+string CMD_gen(int n, int m)
+{
+	int Sub_n = n;
+	int Obj_m = m;
+	// рандомить нужно
+	// <---ЭТО--> и N / M
+	// cdo = 'O-' image_N image_M
+	//
+
+	string res_cmd = "";
+
+	string rwox[4] = { "R","W","O","X" };
+
+
+	int cmd1 = rand() % 5 + 0;
+	string cmdFirst[6] =
+	{
+		// число субъектов(программ обработчиков) n ГОРИЗОНТАЛЬНО/СТРОКА
+		// число объектов(содержат информацию) m ВЕРТИКАЛЬНО/СТОЛБЕЦ
+		/*
+		Create object
+		cco = 'O+' image_M
+		где M - столбец
+		'O+' не генерится, так как для нас не имеет значения имя файла(я так понял O - это имя файла)
+		*/
+		"cco = 'O+' image_", /////////////
+
+
+		/*
+		Create subject
+		ccs = 'S+' image_N
+		где N - строка
+		*/
+		"ccs = 'S+' image_",///////////////////
+
+		/*
+		Destroy object
+		cdo = 'O-' image_M
+		где M - столбец
+		*/
+		"cdo = 'O-' image_",//////////////////
+
+
+		/*
+		Destroy subject
+		сds = 'S-' image_N
+		где N - строка
+		*/
+		"cds = 'S-' image_",////////////////////
+
+
+		/*
+		Enter rule P
+		Enter P = '{RWOX}' image N image M 
+		где N - строка
+		где M - столбец
+		"cer = '{RWOX}' image_N image_M"
+		*/
+		"cer = ",
+
+		/*
+		Delete rule P
+		Delete P = '{RWOX}' image N image M
+		где N - строка
+		где M - столбец
+		"cdr = '{RWOX}' image_N image_M
+		*/
+		"cdr = "
+	};
+
+	if (cmd1 == 0) // create object
+	{
+		//где M - столбец
+		res_cmd += cmdFirst[cmd1];
+		int rander = rand() % Obj_m + 1;
+		res_cmd += to_string(rander);
+	}
+	if (cmd1 == 1) // create subject
+	{
+		//где N - строка
+		res_cmd += cmdFirst[cmd1];
+		int rander = rand() % Sub_n + 1;
+		res_cmd += to_string(rander);
+	}
+	if (cmd1 == 2) // destroy object
+	{
+		//где M - столбец
+		res_cmd += cmdFirst[cmd1];
+		int rander = rand() % Obj_m + 1;
+		res_cmd += to_string(rander);
+	}
+	if (cmd1 == 3) // destroy subject
+	{
+		//где N - строка
+		res_cmd += cmdFirst[cmd1];
+		int rander = rand() % Sub_n + 1;
+		res_cmd += to_string(rander);
+	}
+	if (cmd1 == 4) // enter rule image_N image_M
+	{
+		//где N - строка
+		//где M - столбец 
+		//"cer = '{RWOX}' image_N image_M"
+		res_cmd += cmdFirst[cmd1];
+		int RWOX_rnd = rand() % 3;
+
+		int randN = rand() % Sub_n + 1;
+		int randM = rand() % Obj_m + 1;
+
+		res_cmd += "'";
+		res_cmd += rwox[RWOX_rnd];
+		res_cmd += "'";
+		res_cmd += " image_";
+		res_cmd += to_string(randN);
+		res_cmd += " image_";
+		res_cmd += to_string(randM);
+	}
+	if (cmd1 == 5) // delete rule image_N image_M
+	{
+		//где N - строка
+		//где M - столбец 
+		//"cer = '{RWOX}' image_N image_M"
+		res_cmd += cmdFirst[cmd1];
+		int RWOX_rnd = rand() % 3;
+
+		int randN = rand() % Sub_n + 1;
+		int randM = rand() % Obj_m + 1;
+
+		res_cmd += "'";
+		res_cmd += rwox[RWOX_rnd];
+		res_cmd += "'";
+		res_cmd += " image_";
+		res_cmd += to_string(randN);
+		res_cmd += " image_";
+		res_cmd += to_string(randM);
+	}
+	return res_cmd;
+}
+
+void prgrm_writer(int count,int n, int m)
+{
+	ofstream output_prgrm;
+	output_prgrm.open("prgrm.txt", fstream::in | fstream::out | fstream::trunc);
+	if (output_prgrm.is_open())
+	{
+		for (int i = 0; i < count; i++)
+		{
+			output_prgrm << CMD_gen(n, m) << endl;
+		}
+	}
+	output_prgrm.close();
+}
+
 void main()
 {
 	setlocale(LC_ALL, "RUS");
-
 	srand(time(0));
-	int n, m; // число субъектов(программ обработчиков) n и число объектов(содержат информацию) m 
+	int n; // число субъектов(программ обработчиков) n
+	int m; // число объектов(содержат информацию) m 
+	int k; // число генераций команд
 	n = rand() % 10 + 1;
 	m = rand() % 10 + 1;
+	k = rand() % 10 + 5;
 
 	vector < vector <string> > RW(n, vector <string>(m));
 	vector <int> LS(n); // уровни допуска субъектов s
@@ -157,15 +315,20 @@ void main()
 		{
 			for (int j = 0; j < m; j++)
 			{
-				output_environ << RW[i][j] << " ";
+				output_environ << RW[i][j] << "/";
 			}
-			output_environ << endl;
+			if(i != n - 1)
+				output_environ << endl;
 		}
-
 	}
 	output_environ.close();
 
+	prgrm_writer(k, n, m);
+
 	
+
+	
+
 
 
 	//InputAlpha(n);

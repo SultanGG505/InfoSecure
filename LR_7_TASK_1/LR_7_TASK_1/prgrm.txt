@@ -1,0 +1,10 @@
+ccs = 'S+' image_2
+cer = 'R' image_3 image_8
+cdo = 'O-' image_5
+ccs = 'S+' image_5
+ccs = 'S+' image_8
+cer = 'O' image_7 image_9
+ccs = 'S+' image_8
+cco = 'O+' image_9
+cer = 'W' image_3 image_3
+cer = 'O' image_2 image_6
