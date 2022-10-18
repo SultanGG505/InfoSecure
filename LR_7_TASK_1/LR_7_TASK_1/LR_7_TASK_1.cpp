@@ -316,11 +316,11 @@ void interpreter()
 		for (int j = 0; j < m; j++) // объекты
 		{
 			RW_FROM_FILE_RZLT[i][j] = tokens[j];
-		}			
+		}
 	}
-		
+
 	cout << "вывод для теста RW_FROM_FILE" << endl;
-	
+
 	for (int i = 0; i < n; i++)
 	{
 		for (int j = 0; j < m; j++)
@@ -361,16 +361,36 @@ void interpreter()
 		structed_CMD[i].resize(k);
 		for (int d = 0; d < k; d++)
 		{
-			
 			structed_CMD[i][d] = tokens[d];
 		}
-			
+	}
+
+	//	if (s1.find(s2) != std::string::npos) {
+	//		std::cout << "found!" << '\n';
+	//	}
+	//Note: "found!" will be printed if s2 is a substring of s1, both s1and s2 are of type std::string.
+
+	for (int i = 0; i < cmd_K; i++)
+	{
+		if (structed_CMD[i][0].find("cco") != string::npos)
+			cout << i << " " << "cco" << endl;
+
+		if (structed_CMD[i][0].find("ccs") != string::npos)
+			cout << i << " " << "ccs" << endl;
+
+		if (structed_CMD[i][0].find("cdo") != string::npos)
+			cout << i << " " << "cdo" << endl;
+
+		if (structed_CMD[i][0].find("cds") != string::npos)
+			cout << i << " " << "cds" << endl;
+
+		if (structed_CMD[i][0].find("cer") != string::npos)
+			cout << i << " " << "cer" << endl;
+
+		if (structed_CMD[i][0].find("cdr") != string::npos)
+			cout << i << " " << "cdr" << endl;
 
 	}
-	
-
-
-
 }
 
 void main()
@@ -415,128 +435,5 @@ void main()
 
 	interpreter();
 
-
-
-
-
-	//InputAlpha(n);
-	//Process();
-	//ofstream Output_LS;
-	//Output_LS.open("LS.txt", fstream::in | fstream::out | fstream::trunc);
-	//if (Output_LS.is_open())
-	//{
-	//	Output_LS << result << endl;
-	//}
-	//Output_LS.close();
-	//CompObj.clear();
-	//result = "";
-
-	//InputAlpha(m);
-	//Process();
-	//ofstream Output_LO;
-	//Output_LO.open("LO.txt", fstream::in | fstream::out | fstream::trunc);
-	//if (Output_LO.is_open())
-	//{
-	//	Output_LO << result << endl;
-	//}
-	//Output_LO.close();
-	//CompObj.clear();
-	//result = "";
-
-	//vector <string> LS_s, LO_s;
-
-	//string LS_, LO_;
-	//ifstream inp_LS("LS.txt");
-	//while (getline(inp_LS, LS_)) {
-	//	LS_s.push_back(LS_);
-	//}
-	//inp_LS.close();
-
-	//ifstream inp_LO("LO.txt");
-	//while (getline(inp_LO, LO_)) {
-	//	LO_s.push_back(LO_);
-	//}
-	//inp_LO.close();
-
-	//LS_s.pop_back();
-	//LO_s.pop_back();
-
-	////string temp = "cat";
-	////char tab2[1024];
-	////strcpy_s(tab2, temp.c_str());
-
-	////char c = '1';
-	////int i = c - '0'; // i is now equal to 1, not '1'
-
-	//bool ok = false;
-	//int k = 0, d = 0;
-	//string TMP_S, TMP_O;
-	//while (ok != true)
-	//{
-
-	//	TMP_S = LS_s[k];
-	//	/*vector<int> v(TMP_S.size());*/
-	//	transform(TMP_S.begin(), TMP_S.end(), LS.begin(), [](char c) {return c - '0'; });
-	//	k++;
-	//	if (ok)
-	//		break;
-	//	for (int i = 0; i < n; i++) // субъекты LS
-	//	{
-	//		if (ok)
-	//			break;
-	//		TMP_O = LO_s[d];
-	//		/*vector<int> v(TMP_S.size());*/
-	//		transform(TMP_O.begin(), TMP_O.end(), LO.begin(), [](char c) {return c - '0'; });
-	//		d++;
-	//		for (int j = 0; j < m; j++) // объекты LO
-	//		{
-	//			if (RW[i][j].size() == 2)
-	//			{
-	//				if (((LS[i] > LO[j] && RW[i][j][1] == 'W') || (LS[i] <= LO[j] && RW[i][j][0] == 'R')))
-	//				{
-	//					ok = true;
-	//					break;
-	//				}
-	//			}
-	//			if (RW[i][j].size() == 1)
-	//			{
-	//				if (((LS[i] > LO[j] && RW[i][j] == "W") || (LS[i] <= LO[j] && RW[i][j] == "R")))
-	//				{
-	//					ok = true;
-	//					break;
-	//				}
-	//			}
-	//		}
-
-	//	}
-	//}
-	//cout << "Вывод сгенерированной матрицы на права записи и чтения" << endl;
-
-	//for (int i = 0; i < n; i++)
-	//{
-	//	for (int j = 0; j < m; j++)
-	//		cout << RW[i][j] << ' ';
-	//	cout << endl;
-	//}
-
-	//cout << "Вывод сгенерированного массива уровней допуска субъектов S" << endl;
-
-	//for (int i = 0; i < n; i++)
-	//	cout << LS[i] << " ";
-
-	//cout << endl;
-
-	//cout << "Вывод сгенерированного массива уровней секретности объектов O" << endl;
-
-	//for (int i = 0; i < m; i++)
-	//	cout << LO[i] << " ";
-
-	//cout << endl;
-
-
-	//if (ok)
-	//	cout << "Система соответствует критерию безопасности Белла - Лападулы" << endl;
-	//else
-	//	cout << "Система НЕ соответствует критерию безопасности Белла - Лападулы" << endl;
 
 }
