@@ -1,5 +1,12 @@
-cer = 'W' image_6 image_8
-cdo = 'O-' image_6
+ccs = 'S+' image_2
+cdo = 'O-' image_3
+cer = 'O' image_1 image_3
+cer = 'W' image_2 image_2
 cdo = 'O-' image_1
-cdo = 'O-' image_2
-cds = 'S-' image_5
+cer = 'R' image_1 image_1
+cds = 'S-' image_2
+ccs = 'S+' image_2
+cer = 'W' image_2 image_3
+ccs = 'S+' image_1
+ccs = 'S+' image_1
+cdo = 'O-' image_3

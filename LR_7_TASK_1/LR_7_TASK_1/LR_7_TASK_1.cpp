@@ -390,14 +390,16 @@ void interpreter()
 		if (structed_CMD[i][0].find("cdo") != string::npos)
 		{
 			cout << i << " " << "cdo" << endl;
-			/*int ind = stoi(structed_CMD[i][1]);
-			RW_FROM_FILE_RZLT.erase(RW_FROM_FILE_RZLT.begin() + ind);*/
+			
 
 		}
 
 		if (structed_CMD[i][0].find("cds") != string::npos)
 		{
 			cout << i << " " << "cds" << endl;
+			int ind = stoi(structed_CMD[i][1]);
+			ind--;
+			RW_FROM_FILE_RZLT.erase(RW_FROM_FILE_RZLT.begin() + ind);
 		}
 
 		if (structed_CMD[i][0].find("cer") != string::npos)
@@ -409,16 +411,19 @@ void interpreter()
 		{
 			cout << i << " " << "cdr" << endl;
 		}
-
 	}
+
+
+
 
 	ofstream output_rzlt;
 	output_rzlt.open("rzlt.txt", fstream::in | fstream::out | fstream::trunc);
 	if (output_rzlt.is_open())
 	{
-		for (int i = 0; i < n; i++) // строки
+		
+		for (int i = 0; i < RW_FROM_FILE_RZLT.size(); i++) // строки
 		{
-			for (int j = 0; j < m; j++) // столбцы
+			for (int j = 0; j < RW_FROM_FILE_RZLT[i].size(); j++) // столбцы
 				output_rzlt << RW_FROM_FILE_RZLT[i][j] << ' ';
 			output_rzlt << endl;
 		}
