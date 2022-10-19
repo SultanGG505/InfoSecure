@@ -399,7 +399,15 @@ void interpreter()
 			cout << i << " " << "cds" << endl;
 			int ind = stoi(structed_CMD[i][1]);
 			ind--;
-			RW_FROM_FILE_RZLT.erase(RW_FROM_FILE_RZLT.begin() + ind);
+			try
+			{
+				RW_FROM_FILE_RZLT.erase(RW_FROM_FILE_RZLT.begin() + ind);
+			}
+			catch (const std::exception&)
+			{
+				cout << "выполнить команду невозможно, команда -" << structed_CMD[i][1] << endl;
+			}
+			
 		}
 
 		if (structed_CMD[i][0].find("cer") != string::npos)
