@@ -310,12 +310,13 @@ void interpreter()
 
 	for (int i = 0; i < n; i++) // субъекты
 	{
+		RW_FROM_FILE_RZLT.push_back(vector<string>());
 		input = temp_N_M_A[i];
 		sregex_token_iterator first{ input.begin(), input.end(), re, -1 }, last;
 		vector<string> tokens{ first, last };
 		for (int j = 0; j < m; j++) // объекты
 		{
-			RW_FROM_FILE_RZLT[i][j] = tokens[j];
+			RW_FROM_FILE_RZLT[i].push_back(tokens[j]);
 		}
 	}
 
@@ -377,7 +378,6 @@ void interpreter()
 		{			
 			int ind = stoi(structed_CMD[i][1]);
 			
-			
 
 		}
 			
@@ -416,9 +416,9 @@ void interpreter()
 	output_rzlt.open("rzlt.txt", fstream::in | fstream::out | fstream::trunc);
 	if (output_rzlt.is_open())
 	{
-		for (int i = 0; i < RW_FROM_FILE_RZLT.size(); i++) // строки
+		for (int i = 0; i < n; i++) // строки
 		{
-			for (int j = 0; j < RW_FROM_FILE_RZLT[i].size(); j++) // столбцы
+			for (int j = 0; j < m; j++) // столбцы
 				output_rzlt << RW_FROM_FILE_RZLT[i][j] << ' ';
 			output_rzlt << endl;
 		}
