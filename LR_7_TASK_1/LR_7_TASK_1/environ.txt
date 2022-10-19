@@ -1,8 +1,4 @@
-6
-1
-X 
-O 
-OX 
-OX 
-RWX 
-ROX 
+2
+3
+O RW WOX 
+W RWOX O 

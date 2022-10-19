@@ -147,7 +147,7 @@ string CMD_gen(int n, int m)
 	string rwox[4] = { "R","W","O","X" };
 
 
-	int cmd1 = rand() % 5 + 0;
+	int cmd1 = rand() % 6 + 0;
 	/*if (cmd1 == 2 || cmd1 == 3)
 	{
 		cmd1 = rand() % 5 + 0;
@@ -378,110 +378,187 @@ void interpreter()
 
 	for (int i = 0; i < cmd_K; i++)
 	{
-		if (structed_CMD[i][0].find("cco") != string::npos)
-		{
-			cout << i << " " << "cco" << endl;
-			int ind = stoi(structed_CMD[i][1]);
-			ind--;
-			if (!(RW_FROM_FILE_RZLT.size() == 0 || RW_FROM_FILE_RZLT[0].size() == 0))
+		/*	if (structed_CMD[i][0].find("cco") != string::npos)
 			{
-				try
+				cout << i << " " << "cco" << endl;
+				int ind = stoi(structed_CMD[i][1]);
+				ind--;
+				if (!(RW_FROM_FILE_RZLT.size() == 0 || RW_FROM_FILE_RZLT[0].size() == 0))
 				{
-					for (int d = 0; d < RW_FROM_FILE_RZLT.size(); d++)
+					try
 					{
-						RW_FROM_FILE_RZLT[d].insert(RW_FROM_FILE_RZLT[d].begin() + ind, "R");
+						for (int d = 0; d < RW_FROM_FILE_RZLT.size(); d++)
+						{
+							RW_FROM_FILE_RZLT[d].insert(RW_FROM_FILE_RZLT[d].begin() + ind, "R");
+						}
+					}
+					catch (...)
+					{
+						cout << "выполнить команду невозможно, команда -" << structed_CMD[i][0] << endl;
 					}
 				}
-				catch (...)
-				{
+				else
 					cout << "выполнить команду невозможно, команда -" << structed_CMD[i][0] << endl;
-				}
-			}
-			else
-				cout << "выполнить команду невозможно, команда -" << structed_CMD[i][0] << endl;
 
 
-		}
+			}*/
 
 
-		if (structed_CMD[i][0].find("ccs") != string::npos)
-		{
-			cout << i << " " << "ccs" << endl;
-			int ind = stoi(structed_CMD[i][1]);
-			ind--;
-			vector <string> row = vector <string>(RW_FROM_FILE_RZLT[0].size(), "R");
-			if (!(RW_FROM_FILE_RZLT.size() == 0 || RW_FROM_FILE_RZLT[0].size() == 0))
+			//if (structed_CMD[i][0].find("ccs") != string::npos)
+			//{
+			//	cout << i << " " << "ccs" << endl;
+			//	int ind = stoi(structed_CMD[i][1]);
+			//	ind--;
+			//	vector <string> row = vector <string>(RW_FROM_FILE_RZLT[0].size(), "R");
+			//	if (!(RW_FROM_FILE_RZLT.size() == 0 || RW_FROM_FILE_RZLT[0].size() == 0))
+			//	{
+			//		try
+			//		{
+			//			RW_FROM_FILE_RZLT.insert(RW_FROM_FILE_RZLT.begin() + ind, row);
+			//		}
+			//		catch (...)
+			//		{
+			//			cout << "выполнить команду невозможно, команда -" << structed_CMD[i][0] << endl;
+			//		}
+			//	}
+			//	else
+			//		cout << "выполнить команду невозможно, команда -" << structed_CMD[i][0] << endl;
+
+
+			//}
+
+			//if (structed_CMD[i][0].find("cdo") != string::npos)
+			//{
+			//	cout << i << " " << "cdo" << endl;
+			//	int ind = stoi(structed_CMD[i][1]);
+			//	ind--;
+
+			//	if (!(RW_FROM_FILE_RZLT.size() == 0 || RW_FROM_FILE_RZLT[0].size() <= ind))
+			//	{
+			//		try
+			//		{
+			//			for (int d = 0; d < RW_FROM_FILE_RZLT.size(); d++)
+			//			{
+			//				RW_FROM_FILE_RZLT[d].erase(RW_FROM_FILE_RZLT[d].begin() + ind);
+			//			}
+			//		}
+			//		catch (...)
+			//		{
+			//			cout << "выполнить команду невозможно, команда -" << structed_CMD[i][0] << endl;
+			//		}
+			//	}
+			//	else
+			//		cout << "выполнить команду невозможно, команда -" << structed_CMD[i][0] << endl;
+
+			//}
+
+		/*	if (structed_CMD[i][0].find("cds") != string::npos)
 			{
-				try
+				cout << i << " " << "cds" << endl;
+				int ind = stoi(structed_CMD[i][1]);
+				ind--;
+				if (!(RW_FROM_FILE_RZLT.size() == 0 || RW_FROM_FILE_RZLT.size() <= ind))
 				{
-					RW_FROM_FILE_RZLT.insert(RW_FROM_FILE_RZLT.begin() + ind, row);
-				}
-				catch (...)
-				{
-					cout << "выполнить команду невозможно, команда -" << structed_CMD[i][0] << endl;
-				}
-			}
-			else
-				cout << "выполнить команду невозможно, команда -" << structed_CMD[i][0] << endl;
-
-
-		}
-
-		if (structed_CMD[i][0].find("cdo") != string::npos)
-		{
-			cout << i << " " << "cdo" << endl;
-			int ind = stoi(structed_CMD[i][1]);
-			ind--;
-
-			if (!(RW_FROM_FILE_RZLT.size() == 0 || RW_FROM_FILE_RZLT[0].size() <= ind))
-			{
-				try
-				{
-					for (int d = 0; d < RW_FROM_FILE_RZLT.size(); d++)
+					try
 					{
-						RW_FROM_FILE_RZLT[d].erase(RW_FROM_FILE_RZLT[d].begin() + ind);
+						RW_FROM_FILE_RZLT.erase(RW_FROM_FILE_RZLT.begin() + ind);
+					}
+					catch (...)
+					{
+						cout << "выполнить команду невозможно, команда -" << structed_CMD[i][0] << endl;
 					}
 				}
-				catch (...)
-				{
+				else
 					cout << "выполнить команду невозможно, команда -" << structed_CMD[i][0] << endl;
-				}
-			}
-			else
-				cout << "выполнить команду невозможно, команда -" << structed_CMD[i][0] << endl;
 
-		}
 
-		if (structed_CMD[i][0].find("cds") != string::npos)
-		{
-			cout << i << " " << "cds" << endl;
-			int ind = stoi(structed_CMD[i][1]);
-			ind--;
-			if (!(RW_FROM_FILE_RZLT.size() == 0 || RW_FROM_FILE_RZLT.size() <= ind))
-			{
-				try
-				{
-					RW_FROM_FILE_RZLT.erase(RW_FROM_FILE_RZLT.begin() + ind);
-				}
-				catch (...)
-				{
-					cout << "выполнить команду невозможно, команда -" << structed_CMD[i][0] << endl;
-				}
-			}
-			else
-				cout << "выполнить команду невозможно, команда -" << structed_CMD[i][0] << endl;
-			
+			}*/
 
-		}
-
-		if (structed_CMD[i][0].find("cer") != string::npos)
+		if (structed_CMD[i][0].find("cer") != string::npos) // добавить право
 		{
 			cout << i << " " << "cer" << endl;
+			int ind_S = stoi(structed_CMD[i][1]);
+			int ind_O = stoi(structed_CMD[i][2]);
+			ind_S--; ind_O--;
+
+			if (!(RW_FROM_FILE_RZLT.size() == 0 || RW_FROM_FILE_RZLT.size() < ind_S || RW_FROM_FILE_RZLT[0].size() < ind_O))
+			{
+				string input2 = structed_CMD[i][0];
+				regex re2("cer = ");
+				sregex_token_iterator first{ input2.begin(), input2.end(), re2, -1 }, last;//the '-1' is what makes the regex split (-1 := what was not matched)
+				vector<string> tokens{ first, last };
+
+				string temp = "";
+				for (int z = 0; z < tokens.size(); z++)
+					temp += tokens[z];
+
+				regex re("'");
+				sregex_token_iterator first2{ temp.begin(), temp.end(), re, -1 }, last2;
+				vector<string> tokens2{ first2, last2 };
+				string res = "";
+				for (int z = 0; z < tokens2.size(); z++)
+					res += tokens2[z];
+
+
+				for (int inputInd = 0; inputInd < res.size(); inputInd++)
+				{
+					bool f = true;
+					for (int nowInd = 0; nowInd < RW_FROM_FILE_RZLT[ind_S][ind_O].size(); nowInd++)
+					{
+						if (res[inputInd] == RW_FROM_FILE_RZLT[ind_S][ind_O][nowInd])
+						{
+							f = false;
+							break;
+						}
+					}
+					if (f)
+					{
+						RW_FROM_FILE_RZLT[ind_S][ind_O] += res[inputInd];
+					}
+				}
+
+
+			}
 		}
 
 		if (structed_CMD[i][0].find("cdr") != string::npos)
 		{
 			cout << i << " " << "cdr" << endl;
+			int ind_S = stoi(structed_CMD[i][1]);
+			int ind_O = stoi(structed_CMD[i][2]);
+			ind_S--; ind_O--;
+			if (!(RW_FROM_FILE_RZLT.size() == 0 || RW_FROM_FILE_RZLT.size() < ind_S || RW_FROM_FILE_RZLT[0].size() < ind_O))
+			{
+
+				string input2 = structed_CMD[i][0];
+				regex re2("cdr = ");
+				sregex_token_iterator first{ input2.begin(), input2.end(), re2, -1 }, last;//the '-1' is what makes the regex split (-1 := what was not matched)
+				vector<string> tokens{ first, last };
+
+				string temp = "";
+				for (int z = 0; z < tokens.size(); z++)
+					temp += tokens[z];
+
+				regex re("'");
+				sregex_token_iterator first2{ temp.begin(), temp.end(), re, -1 }, last2;
+				vector<string> tokens2{ first2, last2 };
+				string res = "";
+				for (int z = 0; z < tokens2.size(); z++)
+					res += tokens2[z];
+
+				for (int inputInd = 0; inputInd < res.size(); inputInd++)
+				{
+					for (int nowInd = 0; nowInd < RW_FROM_FILE_RZLT[ind_S][ind_O].size(); nowInd++)
+					{
+						if (res[inputInd] == RW_FROM_FILE_RZLT[ind_S][ind_O][nowInd])
+						{
+							RW_FROM_FILE_RZLT[ind_S][ind_O] = RW_FROM_FILE_RZLT[ind_S][ind_O].substr(0, nowInd) + RW_FROM_FILE_RZLT[ind_S][ind_O].substr(nowInd + 1, RW_FROM_FILE_RZLT[ind_S][ind_O].size() - nowInd - 1);
+							break;
+						}
+					}
+				}
+
+			}
 		}
 	}
 
