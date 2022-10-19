@@ -375,12 +375,12 @@ void interpreter()
 	for (int i = 0; i < cmd_K; i++)
 	{
 		if (structed_CMD[i][0].find("cco") != string::npos)
-		{			
+		{
 			int ind = stoi(structed_CMD[i][1]);
-			
+
 
 		}
-			
+
 
 		if (structed_CMD[i][0].find("ccs") != string::npos)
 		{
@@ -390,8 +390,20 @@ void interpreter()
 		if (structed_CMD[i][0].find("cdo") != string::npos)
 		{
 			cout << i << " " << "cdo" << endl;
+			int ind = stoi(structed_CMD[i][1]);
+			ind--;
+			try
+			{
+				for (int i = 0; i < RW_FROM_FILE_RZLT.size(); i++)
+				{
+					RW_FROM_FILE_RZLT[i].erase(RW_FROM_FILE_RZLT[i].begin() + ind);
+				}
+			}
+			catch (const std::exception&)
+			{
+				cout << "выполнить команду невозможно, команда -" << structed_CMD[i][0] << endl;
+			}
 			
-
 		}
 
 		if (structed_CMD[i][0].find("cds") != string::npos)
@@ -405,9 +417,9 @@ void interpreter()
 			}
 			catch (const std::exception&)
 			{
-				cout << "выполнить команду невозможно, команда -" << structed_CMD[i][1] << endl;
+				cout << "выполнить команду невозможно, команда -" << structed_CMD[i][0] << endl;
 			}
-			
+
 		}
 
 		if (structed_CMD[i][0].find("cer") != string::npos)
@@ -428,7 +440,7 @@ void interpreter()
 	output_rzlt.open("rzlt.txt", fstream::in | fstream::out | fstream::trunc);
 	if (output_rzlt.is_open())
 	{
-		
+
 		for (int i = 0; i < RW_FROM_FILE_RZLT.size(); i++) // строки
 		{
 			for (int j = 0; j < RW_FROM_FILE_RZLT[i].size(); j++) // столбцы
