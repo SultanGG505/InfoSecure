@@ -385,31 +385,41 @@ void interpreter()
 		if (structed_CMD[i][0].find("ccs") != string::npos)
 		{
 			cout << i << " " << "ccs" << endl;
+			int ind = stoi(structed_CMD[i][1]);
+			ind--;
+			vector <string> row = vector <string>();
+			for (int d = 0; d < RW_FROM_FILE_RZLT[i].size(); d++)
+			{
+				row.push_back("R");
+			}
+
+			RW_FROM_FILE_RZLT.insert(RW_FROM_FILE_RZLT.begin() + ind, row);
+
 		}
 
 		if (structed_CMD[i][0].find("cdo") != string::npos)
 		{
 			cout << i << " " << "cdo" << endl;
-			int ind = stoi(structed_CMD[i][1]);
+			/*int ind = stoi(structed_CMD[i][1]);
 			ind--;
 			try
 			{
-				for (int i = 0; i < RW_FROM_FILE_RZLT.size(); i++)
+				for (int d = 0; d < RW_FROM_FILE_RZLT.size(); d++)
 				{
-					RW_FROM_FILE_RZLT[i].erase(RW_FROM_FILE_RZLT[i].begin() + ind);
+					RW_FROM_FILE_RZLT[d].erase(RW_FROM_FILE_RZLT[d].begin() + ind);
 				}
 			}
 			catch (const std::exception&)
 			{
 				cout << "выполнить команду невозможно, команда -" << structed_CMD[i][0] << endl;
-			}
-			
+			}*/
+
 		}
 
 		if (structed_CMD[i][0].find("cds") != string::npos)
 		{
 			cout << i << " " << "cds" << endl;
-			int ind = stoi(structed_CMD[i][1]);
+			/*int ind = stoi(structed_CMD[i][1]);
 			ind--;
 			try
 			{
@@ -418,7 +428,7 @@ void interpreter()
 			catch (const std::exception&)
 			{
 				cout << "выполнить команду невозможно, команда -" << structed_CMD[i][0] << endl;
-			}
+			}*/
 
 		}
 
