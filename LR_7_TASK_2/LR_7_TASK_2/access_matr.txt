@@ -1,6 +1,6 @@
 4
 5
-_ _ RW _ W 
-_ _ RW R _ 
-_ _ _ _ _ 
+RW RW RW _ W 
+W W RW R _ 
+W W _ _ _ 
 RW RW RW RW RW 
