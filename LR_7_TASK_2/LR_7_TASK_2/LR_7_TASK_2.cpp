@@ -126,7 +126,7 @@ void task_3(vector < vector <string> > RW_FROM_FILE_RZLT) // субъекты у
 		bool good = true;
 		for (int j = 0; j < RW_FROM_FILE_RZLT[0].size(); j++) // строки
 		{
-			if (RW_FROM_FILE_RZLT[i][j] != "_")
+			if (RW_FROM_FILE_RZLT[i][j] != "RW")
 				good = false;
 		}
 		if (good)
@@ -218,5 +218,5 @@ void main()
 
 	task_1(input());
 	task_2(input());
-	//task_3(input());
+	task_3(input());
 }

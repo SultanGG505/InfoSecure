@@ -3,4 +3,4 @@
 _ _ RW _ W 
 _ _ RW R _ 
 _ _ _ _ _ 
-_ _ _ W RW 
+RW RW RW RW RW 
