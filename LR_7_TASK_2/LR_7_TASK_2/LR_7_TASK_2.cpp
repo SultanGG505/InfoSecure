@@ -42,39 +42,8 @@ string RWOX_gen() // рандоматор прав доступа на чтен�
 	return for_return;
 }
 
-void task_1() // список объектов, не доступных для всех субъектов
+void task_1(vector < vector <string> > RW_FROM_FILE_RZLT) // список объектов, не доступных для всех субъектов
 {
-	int n, m;
-	vector <string> temp_N_M_A;
-
-	string s;
-	ifstream environ_file("access_matr.txt");
-	while (getline(environ_file, s))
-	{
-		temp_N_M_A.push_back(s);
-	}
-	environ_file.close();
-
-	n = stoi(temp_N_M_A[0]);
-	m = stoi(temp_N_M_A[1]);
-
-	temp_N_M_A.erase(temp_N_M_A.begin(), temp_N_M_A.begin() + 2);
-
-	vector < vector <string> > RW_FROM_FILE_RZLT = vector < vector <string> >();
-	string input = "";
-	regex re("[ ]");
-
-	for (int i = 0; i < n; i++) // субъекты
-	{
-		RW_FROM_FILE_RZLT.push_back(vector<string>());
-		input = temp_N_M_A[i];
-		sregex_token_iterator first{ input.begin(), input.end(), re, -1 }, last;
-		vector<string> tokens{ first, last };
-		for (int j = 0; j < m; j++) // объекты
-		{
-			RW_FROM_FILE_RZLT[i].push_back(tokens[j]);
-		}
-	}
 	vector <int> answer = vector <int>();
 
 
@@ -110,39 +79,9 @@ void task_1() // список объектов, не доступных для �
 
 }
 
-void task_2() // список субъектов, не доступных для всех объектов
+void task_2(vector < vector <string> > RW_FROM_FILE_RZLT) // список субъектов, не доступных для всех объектов
 {
-	int n, m;
-	vector <string> temp_N_M_A;
-
-	string s;
-	ifstream environ_file("access_matr.txt");
-	while (getline(environ_file, s))
-	{
-		temp_N_M_A.push_back(s);
-	}
-	environ_file.close();
-
-	n = stoi(temp_N_M_A[0]);
-	m = stoi(temp_N_M_A[1]);
-
-	temp_N_M_A.erase(temp_N_M_A.begin(), temp_N_M_A.begin() + 2);
-
-	vector < vector <string> > RW_FROM_FILE_RZLT = vector < vector <string> >();
-	string input = "";
-	regex re("[ ]");
-
-	for (int i = 0; i < n; i++) // субъекты
-	{
-		RW_FROM_FILE_RZLT.push_back(vector<string>());
-		input = temp_N_M_A[i];
-		sregex_token_iterator first{ input.begin(), input.end(), re, -1 }, last;
-		vector<string> tokens{ first, last };
-		for (int j = 0; j < m; j++) // объекты
-		{
-			RW_FROM_FILE_RZLT[i].push_back(tokens[j]);
-		}
-	}
+	
 	vector <int> answer = vector <int>();
 
 	for (int i = 0; i < RW_FROM_FILE_RZLT.size(); i++) // столбцы
@@ -176,6 +115,70 @@ void task_2() // список субъектов, не доступных для
 	*/
 
 }
+
+void task_3(vector < vector <string> > RW_FROM_FILE_RZLT) // субъекты у которых есть полный доступ
+{
+
+	vector <int> answer = vector <int>();
+
+	for (int i = 0; i < RW_FROM_FILE_RZLT.size(); i++) // столбцы
+	{
+		bool good = true;
+		for (int j = 0; j < RW_FROM_FILE_RZLT[0].size(); j++) // строки
+		{
+			if (RW_FROM_FILE_RZLT[i][j] != "_")
+				good = false;
+		}
+		if (good)
+			answer.push_back(i + 1);
+	}
+
+	cout << "Вывод списка субъектов, у которых нет объектов с правами" << endl;
+
+	for (int d = 0; d < answer.size(); d++)
+		cout << answer[d] << " ";
+
+	cout << endl;
+}
+
+vector < vector <string> > input()
+{
+	int n, m;
+	vector <string> temp_N_M_A;
+
+	string s;
+	ifstream environ_file("access_matr.txt");
+	while (getline(environ_file, s))
+	{
+		temp_N_M_A.push_back(s);
+	}
+	environ_file.close();
+
+	n = stoi(temp_N_M_A[0]);
+	m = stoi(temp_N_M_A[1]);
+
+	temp_N_M_A.erase(temp_N_M_A.begin(), temp_N_M_A.begin() + 2);
+
+	vector < vector <string> > RW_FROM_FILE_RZLT = vector < vector <string> >();
+	string input = "";
+	regex re("[ ]");
+
+	for (int i = 0; i < n; i++) // субъекты
+	{
+		RW_FROM_FILE_RZLT.push_back(vector<string>());
+		input = temp_N_M_A[i];
+		sregex_token_iterator first{ input.begin(), input.end(), re, -1 }, last;
+		vector<string> tokens{ first, last };
+		for (int j = 0; j < m; j++) // объекты
+		{
+			RW_FROM_FILE_RZLT[i].push_back(tokens[j]);
+		}
+	}
+
+	return RW_FROM_FILE_RZLT;
+}
+
+
 
 void main()
 {
@@ -213,7 +216,7 @@ void main()
 	//}
 	//output_environ.close();
 
-	task_1();
-	task_2();
-
+	task_1(input());
+	task_2(input());
+	//task_3(input());
 }
