@@ -67,7 +67,7 @@ void change_rule(vector <Item>& Items, int act, int i, int j, string rule)
 {
 	// удаление права - 1, добавление права - 2 отвечает переменная act
 	bool standart = false;
-	for (int d = 0; d < Items.size(); d++) 
+	for (int d = 0; d < Items.size(); d++)
 	{
 		if (Items[d].subj_i == i && Items[d].obj_j)
 		{
@@ -118,7 +118,7 @@ void change_rule(vector <Item>& Items, int act, int i, int j, string rule)
 		Items.push_back(temp);
 	}
 	clear(Items);
-	output(Items);	
+	output(Items);
 }
 
 void insert_new_subj(vector <Item>& Items, int new_subj_i, int obj_count)
@@ -133,6 +133,27 @@ void insert_new_subj(vector <Item>& Items, int new_subj_i, int obj_count)
 	}
 	clear(Items);
 	output(Items);
+}
+
+void delete_subj(vector <Item>& Items, int del_subj_i, int obj_count)
+{
+	bool finded = false;
+	for (int i = 0; i < Items.size(); i++)
+	{
+		if (Items[i].subj_i == del_subj_i)
+		{
+			finded = true;
+			Items.erase(Items.begin() + i);
+		}
+	}
+	if (!finded)
+		cout << "Ни одного субъекта с таким именем не найдено, удаления не произошло" << endl;
+	if (finded)
+	{
+		clear(Items);
+		output(Items);
+	}
+
 }
 
 int main()
@@ -161,9 +182,8 @@ int main()
 			}
 		}
 	}
-
 	output(Items);
-	
+
 	cout << "Вывод списка команд, выбираемых в консоли" << endl;
 	cout << "Окончание работы цикла - цифра 0" << endl;
 	cout << "1 - редактирование содержимого любой ячейки" << endl;
@@ -195,7 +215,7 @@ int main()
 			{
 				cout << "выполняется" << endl;
 				change_rule(Items, act, i, j, rule);
-			}			
+			}
 		}
 		if (Inp == 2)
 		{
@@ -205,6 +225,15 @@ int main()
 			cin >> new_subj_i;
 			cout << "выполняется" << endl;
 			insert_new_subj(Items, new_subj_i, m);
+		}
+		if (Inp == 3)
+		{
+			cout << "удаление субъекта" << endl;
+			int del_subj_i;
+			cout << "введите числовой индекс(имя) удаляемого субъекта" << endl;
+			cin >> del_subj_i;
+			cout << "выполняется" << endl;
+			delete_subj(Items, del_subj_i, m);
 		}
 	} while (Inp != 0);
 }
