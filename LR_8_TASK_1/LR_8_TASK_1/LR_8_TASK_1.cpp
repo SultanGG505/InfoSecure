@@ -170,7 +170,20 @@ void usage_prc(vector <Item>& Items, int obj_count)
 	float items_size = Items.size();
 	cout << "заполненность матрицы :" << float((items_size / all) * 100) << "%" << endl;
 }
-
+void list_for_t(vector <Item>& Items, int obj_index, int obj_count)
+{
+	vector <int> answer = vector <int>();
+	for (int i = 0; i < Items.size(); i++)
+	{
+		if (!(find(answer.begin(), answer.end(), Items[i].subj_i) != answer.end()) && Items[i].obj_j == obj_index)
+			answer.push_back(Items[i].subj_i);
+	}
+	cout << "вывод списка субъектов с доступом к объекту T" << endl;
+	for (int i = 0; i < answer.size(); i++)
+	{
+		cout << answer[i] << endl;
+	}
+}
 int main()
 {
 	setlocale(LC_ALL, "RUS");
@@ -255,6 +268,15 @@ int main()
 			cout << "вычисление заполненности матрицы" << endl;
 			cout << "выполняется" << endl;
 			usage_prc(Items, m);
+		}
+		if (Inp == 5)
+		{
+			cout << "список субъектов с доступом к объекту T" << endl;
+			cout << "введите числовой индекс объекта T" << endl;
+			int obj_m;
+			cin >> obj_m;
+			cout << "выполняется" << endl;
+			list_for_t(Items, obj_m, m);
 		}
 	} while (Inp != 0);
 }
