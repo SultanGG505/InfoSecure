@@ -512,10 +512,7 @@ void main()
 	k = rand() % 10 + 5;
 
 	vector < vector <string> > RW(n, vector <string>(m));
-	vector <int> LS(n); // уровни допуска субъектов s
-	vector <int> LO(m); // уровень секретности объектов o
-
-	cout << "генерация rw" << endl;
+		cout << "генерация rw" << endl;
 	for (int i = 0; i < n; i++)
 		for (int j = 0; j < m; j++)
 			RW[i][j] = RWOX_gen();
