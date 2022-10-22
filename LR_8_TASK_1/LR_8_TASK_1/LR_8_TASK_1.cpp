@@ -66,8 +66,13 @@ void clear(vector <Item>& Items)
 void change_rule(vector <Item>& Items, int act, int i, int j, string rule)
 {
 	// удаление права - 1, добавление права - 2 отвечает переменная act
+	bool standart = false;
 	for (int d = 0; d < Items.size(); d++) 
 	{
+		if (Items[d].subj_i == i && Items[d].obj_j)
+		{
+			standart = true;
+		}
 		if (Items[d].subj_i == i && Items[d].obj_j == j && act == 1)
 		{
 			string res = rule;
@@ -103,7 +108,14 @@ void change_rule(vector <Item>& Items, int act, int i, int j, string rule)
 				}
 			}
 		}
-
+	}
+	if (standart == true && act == 2)
+	{
+		Item temp;
+		temp.subj_i = i;
+		temp.obj_j = j;
+		temp.value = rule;
+		Items.push_back(temp);
 	}
 	clear(Items);
 	output(Items);	
