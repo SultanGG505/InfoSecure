@@ -120,6 +120,21 @@ void change_rule(vector <Item>& Items, int act, int i, int j, string rule)
 	clear(Items);
 	output(Items);	
 }
+
+void insert_new_subj(vector <Item>& Items, int new_subj_i, int obj_count)
+{
+	Item temp;
+	temp.subj_i = new_subj_i;
+	temp.value = "R";
+	for (int i = 0; i < obj_count; i++)
+	{
+		temp.obj_j = i;
+		Items.push_back(temp);
+	}
+	clear(Items);
+	output(Items);
+}
+
 int main()
 {
 	setlocale(LC_ALL, "RUS");
@@ -127,7 +142,7 @@ int main()
 	//int n = rand() % 10 + 2; // число субъектов(программ обработчиков) n
 	//int m = rand() % 10 + 2; // число объектов(содержат информацию) m 
 	int n = 5;
-	int m = 5;
+	int m = 4;
 	vector <Item> Items = vector <Item>();
 
 	cout << "генерация rw" << endl;
@@ -153,7 +168,7 @@ int main()
 	cout << "Окончание работы цикла - цифра 0" << endl;
 	cout << "1 - редактирование содержимого любой ячейки" << endl;
 	cout << "2 - добавление нового субъекта в матрицу с указанием его номера" << endl;
-	cout << "3 - удаление Eого объекта из матрицы" << endl;
+	cout << "3 - удаление Eого субъекта из матрицы" << endl;
 	cout << "4 - вычисление процента заполненности матрицы(общее число/хранимое число)" << endl;
 	cout << "5 - формирование списка субъектов, имеющих доступ к указанному объекту" << endl;
 
@@ -172,10 +187,24 @@ int main()
 			cout << "введите право, номер субъекта, номер объекта" << endl;
 			cin >> rule >> i >> j;
 			//i--; j--;
+			if (i > n || j > m)
+			{
+				cout << "не выполнено, такого объекта нет" << endl;
+			}
+			else
+			{
+				cout << "выполняется" << endl;
+				change_rule(Items, act, i, j, rule);
+			}			
+		}
+		if (Inp == 2)
+		{
+			cout << "добавление субъекта" << endl;
+			int new_subj_i;
+			cout << "введите числовой индекс(имя) нового субъекта" << endl;
+			cin >> new_subj_i;
 			cout << "выполняется" << endl;
-			change_rule(Items, act, i, j, rule);
+			insert_new_subj(Items, new_subj_i, m);
 		}
 	} while (Inp != 0);
-
-	return 0;
 }
