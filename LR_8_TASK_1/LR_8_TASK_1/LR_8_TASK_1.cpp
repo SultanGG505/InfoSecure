@@ -42,13 +42,72 @@ string RW_gen() // рандоматор прав доступа на чтени�
 
 void output(vector <Item> Items)
 {
+	cout << "----------------------------------------" << endl;
+	cout << "Вывод сгенерированной разряженной матрицы" << endl;
+	cout << "В формате: имя субъекта, имя объекта, права доступа" << endl;
+	cout << "" << endl;
 	for (int i = 0; i < Items.size(); i++)
 	{
 		cout << Items[i].subj_i << " " << Items[i].obj_j << " " << Items[i].value << endl;
 		cout << "------" << endl;
 	}
+	cout << "----------------------------------------" << endl;
 }
+void clear(vector <Item>& Items)
+{
+	for (int d = 0; d < Items.size(); d++)
+	{
+		if (Items[d].value == "")
+		{
+			Items.erase(Items.begin() + d);
+		}
+	}
+}
+void change_rule(vector <Item>& Items, int act, int i, int j, string rule)
+{
+	// удаление права - 1, добавление права - 2 отвечает переменная act
+	for (int d = 0; d < Items.size(); d++) 
+	{
+		if (Items[d].subj_i == i && Items[d].obj_j == j && act == 1)
+		{
+			string res = rule;
+			for (int inputInd = 0; inputInd < res.size(); inputInd++)
+			{
+				for (int nowInd = 0; nowInd < Items[d].value.size(); nowInd++)
+				{
+					if (res[inputInd] == Items[d].value[nowInd])
+					{
+						Items[d].value = Items[d].value.substr(0, nowInd) + Items[d].value.substr(nowInd + 1, Items[d].value.size() - nowInd - 1);
+						break;
+					}
+				}
+			}
+		}
+		if (Items[d].subj_i == i && Items[d].obj_j == j && act == 2)
+		{
+			string res = rule;
+			for (int inputInd = 0; inputInd < res.size(); inputInd++)
+			{
+				bool f = true;
+				for (int nowInd = 0; nowInd < Items[d].value.size(); nowInd++)
+				{
+					if (res[inputInd] == Items[d].value[nowInd])
+					{
+						f = false;
+						break;
+					}
+				}
+				if (f)
+				{
+					Items[d].value += res[inputInd];
+				}
+			}
+		}
 
+	}
+	clear(Items);
+	output(Items);	
+}
 int main()
 {
 	setlocale(LC_ALL, "RUS");
@@ -76,15 +135,10 @@ int main()
 		}
 	}
 
-	cout << "Вывод сгенерированной разряженной матрицы" << endl;
-	cout << "В формате: имя субъекта, имя объекта, права доступа" << endl;
-	cout << "" << endl;
-
 	output(Items);
-	cout << "----------------------------------------" << endl;
-
+	
 	cout << "Вывод списка команд, выбираемых в консоли" << endl;
-	cout << "Окончание ввода - цифра 0" << endl;
+	cout << "Окончание работы цикла - цифра 0" << endl;
 	cout << "1 - редактирование содержимого любой ячейки" << endl;
 	cout << "2 - добавление нового субъекта в матрицу с указанием его номера" << endl;
 	cout << "3 - удаление Eого объекта из матрицы" << endl;
@@ -94,11 +148,20 @@ int main()
 	int Inp;
 	do
 	{
-		cout << "Введите число: ";
+		cout << "Введите команду: ";
 		cin >> Inp;
 		if (Inp == 1)
 		{
-			cout << "работает" << endl;
+			cout << "редактирование ячейки" << endl;
+			int act, i, j;
+			cout << "удаление права - 1, добавление права - 2" << endl;
+			cin >> act;
+			string rule;
+			cout << "введите право, номер субъекта, номер объекта" << endl;
+			cin >> rule >> i >> j;
+			//i--; j--;
+			cout << "выполняется" << endl;
+			change_rule(Items, act, i, j, rule);
 		}
 	} while (Inp != 0);
 
