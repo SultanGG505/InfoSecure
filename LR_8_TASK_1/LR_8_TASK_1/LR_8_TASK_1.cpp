@@ -156,17 +156,12 @@ void delete_subj(vector <Item>& Items, int del_subj_i, int obj_count)
 
 }
 
-void usage_prc(vector <Item>& Items, int obj_count)
+void usage_prc(vector <Item>& Items, int n, int m)
 {
-	int max_index_i = -1;
-	for (int i = 0; i < Items.size(); i++)
-		if (Items[i].subj_i > max_index_i)
-			max_index_i = Items[i].subj_i;
-	max_index_i++;
-	cout << "размер матрицы NxM :" << max_index_i << "x" << obj_count << endl;
-	cout << "всего клеток в матрице :" << max_index_i * obj_count << endl;
+	cout << "размер матрицы NxM :" << n << "x" << m << endl;
+	cout << "всего клеток в матрице :" << n * m << endl;
 	cout << "заполненных клеток в матрице :" << Items.size() << endl;
-	float all = max_index_i * obj_count;
+	float all = n * m;
 	float items_size = Items.size();
 	cout << "заполненность матрицы :" << float((items_size / all) * 100) << "%" << endl;
 }
@@ -267,7 +262,7 @@ int main()
 		{
 			cout << "вычисление заполненности матрицы" << endl;
 			cout << "выполняется" << endl;
-			usage_prc(Items, m);
+			usage_prc(Items, n, m);
 		}
 		if (Inp == 5)
 		{
