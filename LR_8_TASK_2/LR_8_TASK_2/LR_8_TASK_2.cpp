@@ -43,7 +43,7 @@ int main()
 		tempFirm.FirmName = FirmName;
 		tempObj.ObjFirmName = FirmName;
 		int k;
-		cout << "Введите кол-во объектов в фирме" << endl;
+		cout << "Введите кол-во объектов в фирме "  << FirmName << endl;
 		cin >> k;
 		while (k != 0)
 		{
@@ -59,4 +59,40 @@ int main()
 		Firms.push_back(tempFirm);
 		i++;
 	}
+
+	cout << "Мы не ввели конфликты фирм, введём" << endl;
+	cout << "Конфликтных фирм для одной фирмы может быть всего " << Firms.size() - 1 << endl;
+
+	i = 0;
+	while (i != F)
+	{
+		int k;
+		cout << "Введите кол-во конфликтных фирм в фирме " << Firms[i].FirmName << endl;
+		cin >> k;
+		if (k > Firms.size() - 1)
+		{
+			k = Firms.size() - 1;
+		}
+		while (k != 0)
+		{
+			string tempConfl;
+			cout << "Введите конфликтную фирму" << endl;
+			cin >> tempConfl;
+			Firms[i].ConflictsName.push_back(tempConfl);
+			k--;
+			/*for (int d = 0; d < Firms.size(); d++)
+			{
+				if (Firms[d].FirmName == tempConfl)
+				{
+					Firms[d].ConflictsName.push_back(Firms[i].FirmName);
+				}
+			}*/
+		}
+		i++;
+	}
+
+
+
 }
+
+
